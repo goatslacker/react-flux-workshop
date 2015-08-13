@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import connectToStores from 'alt/utils/connectToStores'
 
+import MessageActions from '../actions/MessageActions'
 import ChannelsStore from '../stores/ChannelsStore'
 import Message from './Message'
 
@@ -13,13 +14,22 @@ class Channel extends Component {
     }
   }
 
+  handleKeyPress = (ev) => {
+    const { charCode, target } = ev
+
+    if (charCode === 13) {
+      MessageActions.createMessage(target.value)
+      this.refs.input.value = ''
+    }
+  }
+
   render() {
     return (
       <div>
         <div>
           {this.renderMessages(this.props.messages)}
         </div>
-        <textarea />
+        <input type="text" ref="input" onKeyPress={this.handleKeyPress} />
       </div>
     )
   }
