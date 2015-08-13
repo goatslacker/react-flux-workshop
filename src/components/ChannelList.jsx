@@ -15,6 +15,10 @@ class ChannelList extends Component {
   }
 
   render() {
+    if (this.props.errorMessage) {
+      return <div>{this.props.errorMessage}</div>
+    }
+
     return (
       <div>
         <ul>
@@ -31,9 +35,10 @@ export default connectToStores({
   },
 
   getPropsFromStores() {
-    const channels = ChannelsStore.getState().channels
+    const { channels, errorMessage } = ChannelsStore.getState()
     return {
-      channels: Object.keys(channels).map(key => channels[key])
+      channels: Object.keys(channels).map(key => channels[key]),
+      errorMessage,
     }
   }
 }, ChannelList)

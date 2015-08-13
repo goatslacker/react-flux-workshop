@@ -1,57 +1,44 @@
 import alt from '../alt'
 import makeHot from 'alt/utils/makeHot'
 import MessageActions from '../actions/MessageActions'
+import ChannelActions from '../actions/ChannelActions'
+import ChannelSource from '../sources/ChannelSource'
 
-export default makeHot(alt, {
-  displayName: 'ChannelsStore',
+class ChannelsStore {
+  static displayName = 'ChannelsStore'
 
-  bindListeners: {
-    messageAdded: MessageActions.messageAdded,
-  },
-
-  state: {
-    channels: {
-      'general': {
-        name: '#general',
-        messages: [
-          {
-            name: 'Luke',
-            avatar: 'http://fillmurray.com/50/50',
-            text: 'Hey there',
-          },
-          {
-            name: 'Han',
-            avatar: 'http://fillmurray.com/50/50',
-            text: 'Hello',
-          },
-          {
-            name: 'Leia',
-            avatar: 'http://fillmurray.com/50/50',
-            text: 'Hi everyone',
-          },
-        ],
-      },
-      'random': {
-        name: '#random',
-        messages: [
-          {
-            name: 'Anakin',
-            avatar: 'http://fillmurray.com/50/50',
-            text: 'I like turtles',
-          },
-          {
-            name: 'R2D2',
-            avatar: 'http://fillmurray.com/50/50',
-            text: 'Beep Boop',
-          },
-        ],
-      },
+  constructor() {
+    this.state = {
+      errorMessage: null,
+      channels: {},
     }
-  },
+
+    this.bindActions(ChannelActions)
+
+    this.bindListeners({
+      messageAdded: MessageActions.messageAdded,
+    })
+
+    this.registerAsync(ChannelSource)
+
+    this.on('beforeEach', () => {
+      this.setState({ errorMessage: null })
+    })
+  }
+
+  channelsFetched(channels) {
+    this.setState({ channels })
+  }
+
+  channelsFailed(errorMessage) {
+    this.setState({ errorMessage })
+  }
 
   messageAdded([channel, message]) {
     const channels = this.state.channels
     channels[channel].messages.push(message)
     this.setState({ channels })
-  },
-})
+  }
+}
+
+export default makeHot(alt, ChannelsStore)
