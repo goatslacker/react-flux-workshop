@@ -18,8 +18,8 @@ class Channel extends Component {
     const { charCode, target } = ev
 
     if (charCode === 13) {
-      MessageActions.createMessage(target.value)
-      this.refs.input.value = ''
+      MessageActions.messageAdded(this.props.params.channel, target.value)
+      this.refs.input.getDOMNode().value = ''
     }
   }
 

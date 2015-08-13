@@ -1,8 +1,13 @@
 import alt from '../alt'
 import makeHot from 'alt/utils/makeHot'
+import MessageActions from '../actions/MessageActions'
 
 export default makeHot(alt, {
   displayName: 'ChannelsStore',
+
+  bindListeners: {
+    messageAdded: MessageActions.messageAdded,
+  },
 
   state: {
     channels: {
@@ -42,5 +47,11 @@ export default makeHot(alt, {
         ],
       },
     }
+  },
+
+  messageAdded([channel, message]) {
+    const channels = this.state.channels
+    channels[channel].messages.push(message)
+    this.setState({ channels })
   },
 })
