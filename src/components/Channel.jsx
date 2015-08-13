@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
 import connectToStores from 'alt/utils/connectToStores'
 
-import ChannelStore from '../stores/ChannelStore'
+import ChannelsStore from '../stores/ChannelsStore'
 import Message from './Message'
-
 
 class Channel extends Component {
   renderMessages(messages) {
@@ -28,14 +27,16 @@ class Channel extends Component {
 
 export default connectToStores({
   getStores() {
-    return [ChannelStore]
+    return [ChannelsStore]
   },
 
-  getPropsFromStores() {
-    const state = ChannelStore.getState()
+  getPropsFromStores(props) {
+    const state = ChannelsStore.getState().channels
 
     return {
-      messages: state.messages,
+      messages: state[props.params.channel]
+        ? state[props.params.channel].messages
+        : [],
     }
   }
 }, Channel)

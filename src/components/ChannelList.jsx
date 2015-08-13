@@ -31,8 +31,9 @@ export default connectToStores({
   },
 
   getPropsFromStores() {
+    const channels = ChannelsStore.getState().channels
     return {
-      channels: ChannelsStore.getState().channels,
+      channels: Object.keys(channels).map(key => channels[key])
     }
   }
 }, ChannelList)
