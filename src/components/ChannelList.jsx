@@ -13,7 +13,6 @@ class ChannelList extends Component {
       'channel-name': true,
       'channel-name-active': this.props.channel == channelName
     })
-    console.log(this.props.channel, name)
 
     return (
       <li key={name} className={classString}>

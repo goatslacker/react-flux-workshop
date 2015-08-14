@@ -29,3 +29,7 @@
 .channel-name-active a{
 	color: #fff;
 }
+
+.avatar{
+	border-radius: 4px;
+}
