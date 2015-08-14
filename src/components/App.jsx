@@ -6,33 +6,17 @@ import ChannelsStore from '../stores/ChannelsStore'
 
 import ChannelList from './ChannelList'
 
+import connectToStores from 'alt/utils/connectToStores'
+
 class App extends Component {
-  constructor() {
-    super()
-
-    this.state = ChannelsStore.getState()
-  }
-
-  componentDidMount() {
-    this.removeEventListener = ChannelsStore.listen((state) => {
-      this.setState(state)
-    })
-  }
-
-  componentWillUnmount() {
-    this.removeEventListener()
-  }
-
   createChannel = () => {
     const channelName = prompt('What is the channel?')
 
     ChannelActions.channelCreated(channelName)
-
-    console.log(ChannelsStore.getState())
   }
 
   render() {
-    const { channels } = this.state
+    const { channels } = this.props
 
     return (
       <div>
@@ -57,4 +41,12 @@ class App extends Component {
   }
 }
 
-export default App
+export default connectToStores({
+  getStores() {
+    return [ChannelsStore]
+  },
+
+  getPropsFromStores() {
+    return ChannelsStore.getState()
+  },
+}, App)
