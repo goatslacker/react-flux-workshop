@@ -13,12 +13,12 @@ const channels = {
       },
       {
         name: 'Han',
-        avatar: 'http://fillmurray.com/50/50',
+        avatar: 'http://fillmurray.com/51/51',
         text: 'Hello',
       },
       {
         name: 'Leia',
-        avatar: 'http://fillmurray.com/50/50',
+        avatar: 'http://fillmurray.com/52/52',
         text: 'Hi everyone',
       },
     ],
@@ -28,12 +28,12 @@ const channels = {
     messages: [
       {
         name: 'Anakin',
-        avatar: 'http://fillmurray.com/50/50',
+        avatar: 'http://fillmurray.com/53/53',
         text: 'I like turtles',
       },
       {
         name: 'R2D2',
-        avatar: 'http://fillmurray.com/50/50',
+        avatar: 'http://fillmurray.com/54/54',
         text: 'Beep Boop',
       },
     ],
