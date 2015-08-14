@@ -2,7 +2,9 @@ import classname from 'classnames'
 import React, { Component } from 'react'
 import { Link } from 'react-router'
 import connectToStores from 'alt/utils/connectToStores'
+import { Button } from 'react-bootstrap'
 
+import ChannelActions from '../actions/ChannelActions'
 import ChannelsStore from '../stores/ChannelsStore'
 
 class ChannelList extends Component {
@@ -21,6 +23,11 @@ class ChannelList extends Component {
     )
   }
 
+  createChannel = () => {
+    const channelName = prompt('What is the channel name?')
+    if (channelName) ChannelActions.channelAdded(channelName)
+  }
+
   render() {
     if (this.props.errorMessage) {
       return <div>{this.props.errorMessage}</div>
@@ -31,6 +38,7 @@ class ChannelList extends Component {
         <ul className="channel-list">
           {this.props.channels.map(this.renderChannel)}
         </ul>
+        <Button bsStyle="success" onClick={this.createChannel}>+ Create Channel</Button>
       </div>
     )
   }

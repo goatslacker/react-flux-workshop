@@ -1,6 +1,7 @@
 import alt from '../alt'
 import axios from 'axios'
 import UserStore from '../stores/UserStore'
+import { api } from '../utils/api'
 
 export default alt.createActions({
   displayName: 'MessageActions',
@@ -12,9 +13,12 @@ export default alt.createActions({
       avatar: user.avatar,
       text,
     }
-    return axios.post(`http://localhost:1305`, {
-      channel,
-      message,
-    }).then(res => [channel, res.data])
+
+    return (dispatch) => {
+      axios.post(api('message'), {
+        channel,
+        message,
+      }).then(res => dispatch([channel, res.data]))
+    }
   }
 })

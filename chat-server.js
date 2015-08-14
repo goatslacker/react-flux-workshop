@@ -59,9 +59,14 @@ app.use((req, res, next) => {
 app.get('/', (req, res) => res.json(channels))
 app.get('/:channel', (req, res) => res.json(channels[req.params.channel]))
 
-app.post('/', (req, res) => {
+app.post('/message', (req, res) => {
   channels[req.body.channel].messages.push(req.body.message)
   res.json(req.body.message)
+})
+
+app.post('/channel', (req, res) => {
+  channels[req.body.channel] = { name: `#${req.body.channel}`, messages: [] }
+  res.json(channels[req.body.channel])
 })
 
 app.listen(1305, () => console.log('Started'))

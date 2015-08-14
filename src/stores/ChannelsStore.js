@@ -26,6 +26,12 @@ class ChannelsStore {
     })
   }
 
+  channelAdded([channel, data]) {
+    const { channels } = this.state
+    channels[channel] = data
+    this.setState({ channels })
+  }
+
   channelsFetched(channels) {
     this.setState({ channels })
   }
@@ -35,7 +41,7 @@ class ChannelsStore {
   }
 
   messageAdded([channel, message]) {
-    const channels = this.state.channels
+    const { channels } = this.state
     channels[channel].messages.push(message)
     this.setState({ channels })
   }
