@@ -11,10 +11,14 @@ class ChannelList extends Component {
   }
 
   render() {
+    const { channels } = this.props
+
     return (
       <div>
         <ul>
-          {this.props.channels.map(this.renderChannel)}
+          {Object.keys(channels).map((channelName) => {
+            return this.renderChannel(channels[channelName])
+          })}
         </ul>
       </div>
     )

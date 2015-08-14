@@ -1,49 +1,27 @@
 import React, { Component } from 'react'
 import { Col, Grid, Row, Button } from 'react-bootstrap'
 
+import ChannelActions from '../actions/ChannelActions'
+import ChannelsStore from '../stores/ChannelsStore'
+
 import ChannelList from './ChannelList'
 
 class App extends Component {
-  constructor() {
-    super()
-
-    this.state = {
-      channels: [
-        {
-          name: '#react',
-          messages: [
-            {
-              user: 'Luke Skywalker',
-              avatar: 'http://placecage.com/50/50',
-              text: 'Hello!'
-            },
-          ]
-        },
-        { name: '#wyncode' },
-        { name: '#flux' },
-        { name: '#javascript' },
-        { name: '#miami' },
-      ]
-    }
-  }
-
   createChannel = () => {
     const channelName = prompt('What is the channel?')
 
-    const channels = this.state.channels
-
-    channels.push({ name: `#${channelName}` })
-
-    this.setState({ channels })
+    ChannelActions.channelCreated(channelName)
   }
 
   render() {
+    const { channels } = ChannelsStore.getState()
+
     return (
       <div>
         <Grid>
           <Row>
-            <Col lg={4}>
-              <ChannelList channels={this.state.channels} />
+            <Col sm={2}>
+              <ChannelList channels={channels} />
               <Button
                 bsStyle="success"
                 onClick={this.createChannel}
@@ -51,7 +29,7 @@ class App extends Component {
                 + Create Channel
               </Button>
             </Col>
-            <Col lg={8}>
+            <Col sm={10}>
               {this.props.children || 'Join a channel'}
             </Col>
           </Row>
