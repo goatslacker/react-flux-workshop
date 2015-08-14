@@ -12,10 +12,10 @@ class Message extends Component {
     return (
         <Row>
           <Col lg={2}>
-            <h3>{this.props.name}</h3>
             <img src={this.props.avatar} alt={this.props.name} width={50} />
           </Col>
           <Col lg={10}>
+            <h3>{this.props.name}</h3>
             {this.props.text}
           </Col>
         </Row>
