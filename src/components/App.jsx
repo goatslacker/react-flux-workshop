@@ -7,14 +7,32 @@ import ChannelsStore from '../stores/ChannelsStore'
 import ChannelList from './ChannelList'
 
 class App extends Component {
+  constructor() {
+    super()
+
+    this.state = ChannelsStore.getState()
+  }
+
+  componentDidMount() {
+    this.removeEventListener = ChannelsStore.listen((state) => {
+      this.setState(state)
+    })
+  }
+
+  componentWillUnmount() {
+    this.removeEventListener()
+  }
+
   createChannel = () => {
     const channelName = prompt('What is the channel?')
 
     ChannelActions.channelCreated(channelName)
+
+    console.log(ChannelsStore.getState())
   }
 
   render() {
-    const { channels } = ChannelsStore.getState()
+    const { channels } = this.state
 
     return (
       <div>

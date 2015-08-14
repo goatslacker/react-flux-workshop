@@ -46,4 +46,4 @@ class ChannelsStore {
 }
 
 
-export default (window.ChannelsStore = alt.createStore(ChannelsStore))
+export default alt.createStore(ChannelsStore)
