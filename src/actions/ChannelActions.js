@@ -4,11 +4,16 @@ import { api } from '../utils/api'
 
 export default alt.createActions({
   displayName: 'ChannelActions',
+
   channelAdded: channel => {
-    return axios.post(api('channel'), {
-      channel,
-    }).then(res => [channel, res.data])
+    return (dispatch) => {
+      axios.post(api('channel'), {
+        channel,
+      }).then(res => dispatch([channel, res.data]))
+    }
   },
+
   channelsFetched: channels => channels,
+
   channelsFailed: err => err,
 })

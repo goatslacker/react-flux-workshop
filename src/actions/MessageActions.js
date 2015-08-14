@@ -13,9 +13,12 @@ export default alt.createActions({
       avatar: user.avatar,
       text,
     }
-    return axios.post(api('message'), {
-      channel,
-      message,
-    }).then(res => [channel, res.data])
+
+    return (dispatch) => {
+      axios.post(api('message'), {
+        channel,
+        message,
+      }).then(res => dispatch([channel, res.data]))
+    }
   }
 })
