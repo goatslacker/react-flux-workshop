@@ -10,13 +10,17 @@ class Message extends Component {
 
   render() {
     return (
-        <Row>
-          <Col lg={2}>
-            <h3>{this.props.name}</h3>
+        <Row style={{ marginBottom: 4 }}>
+          <Col sm={2} style={{ marginRight: 8, width: 50 }}>
             <img src={this.props.avatar} alt={this.props.name} width={50} />
           </Col>
-          <Col lg={10}>
-            {this.props.text}
+          <Col sm={10}>
+            <div>
+              <strong>{this.props.name}</strong>
+            </div>
+            <div>
+              {this.props.text}
+            </div>
           </Col>
         </Row>
     )

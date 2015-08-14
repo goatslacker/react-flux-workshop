@@ -14,10 +14,10 @@ class App extends Component {
       <div>
         <Grid>
           <Row>
-            <Col lg={4}>
+            <Col sm={2}>
               <ChannelList />
             </Col>
-            <Col lg={8}>
+            <Col sm={10}>
               {this.props.children || 'Join a channel'}
             </Col>
           </Row>
