@@ -41,6 +41,8 @@ class Channel extends Component {
     const { params } = this.props
 
     const currentChannel = channels[params.channel]
+    if (!currentChannel) return null
+
     const messages = currentChannel.messages || []
 
     return (
