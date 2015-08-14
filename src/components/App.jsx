@@ -15,11 +15,11 @@ class App extends Component {
       <div>
         <Grid>
           <Row>
-            <Col sm={2}>
-              <ChannelList />
+            <Col sm={2} smPull={1}>
+              <ChannelList channel={this.props.params.channel}/>
               <User />
             </Col>
-            <Col sm={10}>
+            <Col sm={10} smPull={1}>
               {this.props.children || 'Join a channel'}
             </Col>
           </Row>

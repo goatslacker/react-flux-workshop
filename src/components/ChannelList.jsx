@@ -1,3 +1,4 @@
+import classname from 'classnames'
 import React, { Component } from 'react'
 import { Link } from 'react-router'
 import connectToStores from 'alt/utils/connectToStores'
@@ -7,11 +8,18 @@ import ChannelActions from '../actions/ChannelActions'
 import ChannelsStore from '../stores/ChannelsStore'
 
 class ChannelList extends Component {
-  renderChannel(channel) {
+  renderChannel = (channel) => {
     const { name } = channel
+    const channelName = name.substr(1)
+    const classString = classname({
+      'channel-name': true,
+      'channel-name-active': this.props.channel == channelName
+    })
+    console.log(this.props.channel, name)
+
     return (
-      <li key={name}>
-        <Link to={`/${name.substr(1)}`}>{name}</Link>
+      <li key={name} className={classString}>
+        <Link to={`/${channelName}`}>{name}</Link>
       </li>
     )
   }
@@ -28,7 +36,7 @@ class ChannelList extends Component {
 
     return (
       <div>
-        <ul>
+        <ul className="channel-list">
           {this.props.channels.map(this.renderChannel)}
         </ul>
         <Button bsStyle="success" onClick={this.createChannel}>+ Create Channel</Button>
