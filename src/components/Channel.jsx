@@ -4,7 +4,7 @@ class Channel extends Component {
   render() {
     return (
       <div>
-        Nothing
+      Something
       </div>
     )
   }
