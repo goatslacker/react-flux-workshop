@@ -1,6 +1,9 @@
 import express from 'express'
+import bodyParser from 'body-parser'
 
 const app = express()
+
+app.use(bodyParser.json())
 
 const channels = {
   'general': {
@@ -43,10 +46,22 @@ const channels = {
 // Allow CORS
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*')
+  res.header('Access-Control-Allow-Headers', 'Content-Type')
+
+  console.log(req.method, req.url)
+  console.log(req.params)
+  console.log(req.body)
+  console.log('--')
+
   next()
 })
 
 app.get('/', (req, res) => res.json(channels))
 app.get('/:channel', (req, res) => res.json(channels[req.params.channel]))
+
+app.post('/', (req, res) => {
+  channels[req.body.channel].messages.push(req.body.message)
+  res.json(req.body.message)
+})
 
 app.listen(1305, () => console.log('Started'))

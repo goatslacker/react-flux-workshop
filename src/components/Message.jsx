@@ -21,6 +21,7 @@ class Message extends Component {
           <div>
             {this.props.text}
           </div>
+        </Col>
       </Row>
     )
   }
