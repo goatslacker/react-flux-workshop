@@ -1,11 +1,11 @@
-.channel-list{
+.channel-list {
 	list-style-type: none;
 	padding: 0px;
 	margin: 10px 0px;
 }
 
-.channel-name{
-	list-style-type: none;
+.channel-name {
+  display: block;
 	border-top-right-radius: 4px;
 	border-bottom-right-radius: 4px;
 	padding-left: 10px;
@@ -13,19 +13,19 @@
 	border: 1px solid transparent;
 }
 
-.channel-name a{
+.channel-name {
 	color: #ab9ba9;
 }
 
-.channel-name:hover{
+.channel-name:hover {
 	border: 1px solid #cfcfcf;
-	background-color: #cfcfcf;
+	background-color: #ededed;
+  color: #353535;
+  text-decoration: none;
 }
 
-.channel-name-active{
+.channel-name.active {
 	background-color: #4c9689;
-}
-
-.channel-name-active a{
-	color: #fff;
+  color: #fff;
+  text-decoration: none;
 }
