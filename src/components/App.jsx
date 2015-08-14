@@ -3,6 +3,7 @@ import { Col, Grid, Row } from 'react-bootstrap'
 
 import ChannelList from './ChannelList'
 import ChannelsStore from '../stores/ChannelsStore'
+import User from './User'
 
 class App extends Component {
   componentDidMount() {
@@ -16,6 +17,7 @@ class App extends Component {
           <Row>
             <Col sm={2} smPull={1}>
               <ChannelList channel={this.props.params.channel}/>
+              <User />
             </Col>
             <Col sm={10} smPull={1}>
               {this.props.children || 'Join a channel'}
