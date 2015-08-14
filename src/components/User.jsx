@@ -1,13 +1,20 @@
 import React, { Component } from 'react'
+import { Input } from 'react-bootstrap'
 import connectToStores from 'alt/utils/connectToStores'
-
+import UserActions from '../actions/UserActions'
 import UserStore from '../stores/UserStore'
 
 class User extends Component {
+  changeName(e) {
+    UserActions.nameChanged(e.target.value)
+  }
+
   render() {
     return (
       <div>
-        {this.props.name}
+        <hr/>
+        <label>Your handle</label>
+        <Input type="text" value={this.props.name} onChange={this.changeName} />
       </div>
     )
   }
