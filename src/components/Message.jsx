@@ -10,7 +10,6 @@ class Message extends Component {
 
   render() {
     return (
-      <Grid>
         <Row>
           <Col lg={2}>
             <h3>{this.props.name}</h3>
@@ -20,7 +19,6 @@ class Message extends Component {
             {this.props.text}
           </Col>
         </Row>
-      </Grid>
     )
   }
 }
