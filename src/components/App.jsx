@@ -46,6 +46,10 @@ export default connectToStores({
     return [ChannelsStore]
   },
 
+  componentDidConnect() {
+    ChannelsStore.fetchChannels()
+  },
+
   getPropsFromStores() {
     return ChannelsStore.getState()
   },

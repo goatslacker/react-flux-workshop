@@ -8,4 +8,12 @@ export default alt.createActions({
   messageAdded(channel, text) {
     return  { channel, text }
   },
+
+  channelsReceived(payload) {
+    return payload.channels
+  },
+
+  channelsFailed(errorMessage) {
+    return errorMessage
+  },
 })

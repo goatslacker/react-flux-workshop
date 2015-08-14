@@ -2,39 +2,16 @@ import alt from '../alt'
 
 import ChannelActions from '../actions/ChannelActions'
 
+import ChannelSource from '../sources/ChannelSource'
+
 class ChannelsStore {
   static displayName = 'ChannelsStore'
 
   constructor() {
     this.bindActions(ChannelActions)
+    this.registerAsync(ChannelSource)
 
-    this.state = {
-      channels: {
-        react: {
-          name: '#react',
-          messages: [
-            {
-              user: 'Luke Skywalker',
-              avatar: 'http://placecage.com/50/50',
-              text: 'Hello!',
-            },
-          ],
-        },
-        wyncode: { name: '#wyncode', messages: [] },
-        flux: {
-          name: '#flux',
-          messages: [
-            {
-              user: 'Anakin Skywalker',
-              avatar: 'http://placecage.com/51/51',
-              text: 'Sup',
-            },
-          ],
-        },
-        javascript: { name: '#javascript', messages: [] },
-        miami: { name: '#miami', messages: [] },
-      }
-    }
+    this.state = { channels: {} }
   }
 
   channelCreated(name) {
@@ -56,6 +33,14 @@ class ChannelsStore {
     })
 
     this.setState({ channels })
+  }
+
+  channelsReceived(channels) {
+    this.setState({ channels })
+  }
+
+  channelsFailed(errorMessage) {
+    throw new Error(errorMessage)
   }
 }
 
