@@ -31,8 +31,6 @@ class Channel extends Component {
         ev.target.value
       )
       ev.target.value = ''
-
-      console.log(ChannelsStore.getState())
     }
   }
 

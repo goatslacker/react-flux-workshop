@@ -21,16 +21,12 @@ class ChannelsStore {
   }
 
   messageAdded(payload) {
-    const { channel, text } = payload
+    const { channel, message } = payload
     const channels = this.state.channels
 
     channels[channel].messages = channels[channel].messages || []
 
-    channels[channel].messages.push({
-      user: 'R2D2',
-      avatar: 'http://placecage.com/49/49',
-      text,
-    })
+    channels[channel].messages.push(message)
 
     this.setState({ channels })
   }
