@@ -31,41 +31,6 @@ const channels = {
     javascript: { name: '#javascript', messages: [] },
     miami: { name: '#miami', messages: [] },
   },
-  general: {
-    name: '#general',
-    messages: [
-      {
-        name: 'Luke',
-        avatar: 'http://fillmurray.com/50/50',
-        text: 'Hey there',
-      },
-      {
-        name: 'Han',
-        avatar: 'http://fillmurray.com/51/51',
-        text: 'Hello',
-      },
-      {
-        name: 'Leia',
-        avatar: 'http://fillmurray.com/52/52',
-        text: 'Hi everyone',
-      },
-    ],
-  },
-  random: {
-    name: '#random',
-    messages: [
-      {
-        name: 'Anakin',
-        avatar: 'http://fillmurray.com/53/53',
-        text: 'I like turtles',
-      },
-      {
-        name: 'R2D2',
-        avatar: 'http://fillmurray.com/54/54',
-        text: 'Beep Boop',
-      },
-    ],
-  },
 }
 
 // Allow CORS
@@ -85,7 +50,7 @@ app.get('/', (req, res) => res.json(channels))
 app.get('/:channel', (req, res) => res.json(channels[req.params.channel]))
 
 app.post('/message', (req, res) => {
-  channels[req.body.channel].messages.push(req.body.message)
+  channels.channels[req.body.channel].messages.push(req.body.message)
   res.json(req.body.message)
 })
 
