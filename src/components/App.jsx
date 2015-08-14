@@ -10,7 +10,9 @@ class App extends Component {
         <Grid>
           <Row>
             <Col lg={4}>
-              <ChannelList />
+              <ChannelList channels={[
+                { name: '#foo' }
+              ]} />
             </Col>
             <Col lg={8}>
               {this.props.children || 'Join a channel'}
