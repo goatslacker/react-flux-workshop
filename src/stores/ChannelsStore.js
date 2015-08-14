@@ -31,17 +31,31 @@ class ChannelsStore {
             },
           ],
         },
-        javascript: { name: '#javascript' },
-        miami: { name: '#miami' },
+        javascript: { name: '#javascript', messages: [] },
+        miami: { name: '#miami', messages: [] },
       }
     }
   }
 
-
   channelCreated(name) {
     const channels = this.state.channels
-    channels[name] = { name: `#${name}` }
+    channels[name] = { name: `#${name}`, messages: [] }
     this.setState({ channels: channels })
+  }
+
+  messageAdded(payload) {
+    const { channel, text } = payload
+    const channels = this.state.channels
+
+    channels[channel].messages = channels[channel].messages || []
+
+    channels[channel].messages.push({
+      user: 'R2D2',
+      avatar: 'http://placecage.com/49/49',
+      text,
+    })
+
+    this.setState({ channels })
   }
 }
 

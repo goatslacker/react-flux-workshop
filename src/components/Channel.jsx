@@ -2,7 +2,10 @@ import React, { Component } from 'react'
 
 import { Col, Grid, Row } from 'react-bootstrap'
 
+import ChannelActions from '../actions/ChannelActions'
 import ChannelsStore from '../stores/ChannelsStore'
+
+import connectToStores from 'alt/utils/connectToStores'
 
 class Channel extends Component {
   renderMessage(message) {
@@ -19,8 +22,22 @@ class Channel extends Component {
     )
   }
 
+  handleKeyPress = (ev) => {
+    const keyCode = ev.charCode
+
+    if (keyCode === 13) {
+      ChannelActions.messageAdded(
+        this.props.params.channel,
+        ev.target.value
+      )
+      ev.target.value = ''
+
+      console.log(ChannelsStore.getState())
+    }
+  }
+
   render() {
-    const { channels } = ChannelsStore.getState()
+    const { channels } = this.props
     const { params } = this.props
 
     const currentChannel = channels[params.channel]
@@ -29,9 +46,18 @@ class Channel extends Component {
     return (
       <div>
         {messages.map(this.renderMessage)}
+        <input type="text" onKeyPress={this.handleKeyPress} />
       </div>
     )
   }
 }
 
-export default Channel
+export default connectToStores({
+  getStores() {
+    return [ChannelsStore]
+  },
+
+  getPropsFromStores() {
+    return ChannelsStore.getState()
+  },
+}, Channel)
